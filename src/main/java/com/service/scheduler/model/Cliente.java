@@ -3,6 +3,7 @@ package com.service.scheduler.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -33,9 +34,10 @@ public class Cliente {
     //private List<Endereco> enderecos;
 	
 	@Enumerated(EnumType.ORDINAL) // para gravar no banco o índice(começa com zero) e não o nome
-    private Status status;
+	@Column(columnDefinition = "smallint")
+	private Status status;
 	
-	@OneToMany
+	@OneToMany (mappedBy = "cliente")
 	private List<Agenda> agendas;
 	
 	

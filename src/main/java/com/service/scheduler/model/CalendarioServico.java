@@ -3,6 +3,7 @@ package com.service.scheduler.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,10 +15,11 @@ import com.service.scheduler.enums.Status;
 public class CalendarioServico implements Serializable {
 	
 	@EmbeddedId
-	private CalendarioServicoKey calendarioServico;
+	private CalendarioServicoKey calendarioServicoKey;
 	
 	@Enumerated(EnumType.ORDINAL) // para gravar no banco o índice(começa com zero) e não o nome
-    private Status status;
+	@Column(columnDefinition = "smallint")
+	private Status status;
 	
 	//Método Constructor
 	
@@ -28,20 +30,20 @@ public class CalendarioServico implements Serializable {
 
 	//Métodos Get e Set
 	
-	public CalendarioServico(CalendarioServicoKey calendarioServico, Status status) {
+	public CalendarioServico(CalendarioServicoKey calendarioServicoKey, Status status) {
 		super();
-		this.calendarioServico = calendarioServico;
+		this.calendarioServicoKey = calendarioServicoKey;
 		this.status = status;
 	}
 
 
 
 	public CalendarioServicoKey getCalendarioServico() {
-		return calendarioServico;
+		return calendarioServicoKey;
 	}
 
-	public void setCalendarioServico(CalendarioServicoKey calendarioServico) {
-		this.calendarioServico = calendarioServico;
+	public void setCalendarioServico(CalendarioServicoKey calendarioServicoKey) {
+		this.calendarioServicoKey = calendarioServicoKey;
 	}
 
 	public Status getStatus() {
@@ -56,7 +58,7 @@ public class CalendarioServico implements Serializable {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(calendarioServico);
+		return Objects.hash(calendarioServicoKey);
 	}
 
 	@Override
@@ -68,7 +70,7 @@ public class CalendarioServico implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		CalendarioServico other = (CalendarioServico) obj;
-		return Objects.equals(calendarioServico, other.calendarioServico);
+		return Objects.equals(calendarioServicoKey, other.calendarioServicoKey);
 	}
 
 

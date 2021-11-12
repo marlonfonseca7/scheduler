@@ -3,6 +3,7 @@ package com.service.scheduler.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -28,20 +29,25 @@ public class Servico implements Serializable {
 	//private Enum<Status> status;
 	
 	@Enumerated(EnumType.ORDINAL) // para gravar no banco o índice(começa com zero) e não o nome
-    private Status status;
+	@Column(columnDefinition = "smallint")
+	private Status status;
 	
-	@OneToMany(mappedBy = "calendarioServico.servico") 	// , fetch = FetchType.LAZY) 	Nem faz diferença pra recursividade
+	@OneToMany(mappedBy = "calendarioServicoKey.servico") 	// , fetch = FetchType.LAZY) 	Nem faz diferença pra recursividade
 	// from : https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
 	//@JsonManagedReference 	// Mostra o Fornecedor e todos seus Produtos - Usar somente em List
 	//@JsonIgnore 				// Mostra somente o Fornecedor
 	private List<CalendarioServico> calendarioServico;	
 	
-	@OneToMany(mappedBy = "calendarioProfissional.servico") 	// , fetch = FetchType.LAZY) 	Nem faz diferença pra recursividade
+	@OneToMany(mappedBy = "calendarioProfissionalKey.servico") 	// , fetch = FetchType.LAZY) 	Nem faz diferença pra recursividade
 	private List<CalendarioProfissional> calendarioProfissionais;		
+	
+	//Método Constructor
 	
 	public Servico() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	//Métodos Get e Set
 	
 	public Long getId() {
 		return id;

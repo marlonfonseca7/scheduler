@@ -3,6 +3,7 @@ package com.service.scheduler.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -28,9 +29,10 @@ public class Profissional {
 	private String email;
 	
 	@Enumerated(EnumType.ORDINAL) // para gravar no banco o índice(começa com zero) e não o nome
-    private Status status;
+	@Column(columnDefinition = "smallint")
+	private Status status;
 	
-	@OneToMany(mappedBy = "calendarioProfissional.profissional") 	// , fetch = FetchType.LAZY) 	Nem faz diferença pra recursividade
+	@OneToMany(mappedBy = "calendarioProfissionalKey.profissional") 	// , fetch = FetchType.LAZY) 	Nem faz diferença pra recursividade
 	private List<CalendarioProfissional> calendarioProfissionais;	
 	
 	public Profissional() {

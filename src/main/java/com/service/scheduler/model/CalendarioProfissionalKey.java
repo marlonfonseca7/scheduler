@@ -2,7 +2,8 @@ package com.service.scheduler.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 import javax.persistence.JoinColumn;
@@ -16,13 +17,15 @@ public class CalendarioProfissionalKey implements Serializable {
 	@JoinColumn(name="servico", referencedColumnName = "id")
 	private Servico servico;
 	private LocalDate data;
-	private LocalDateTime horaInicial;
-	private LocalDateTime horaFinal;
+	private LocalTime horaInicial;
+	private LocalTime horaFinal;
 
 	@ManyToOne
 	@JoinColumn(name="profissional", referencedColumnName = "id")
 	private Profissional profissional;
 	
+	
+	//Método Constructor
 	
 	public CalendarioProfissionalKey() {
 		// TODO Auto-generated constructor stub
@@ -30,7 +33,7 @@ public class CalendarioProfissionalKey implements Serializable {
 
 	
 	
-	public CalendarioProfissionalKey(Servico servico, LocalDate data, LocalDateTime horaInicial, LocalDateTime horaFinal,
+	public CalendarioProfissionalKey(Servico servico, LocalDate data, LocalTime horaInicial, LocalTime horaFinal,
 			Profissional profissional) {
 		super();
 		this.servico = servico;
@@ -40,6 +43,7 @@ public class CalendarioProfissionalKey implements Serializable {
 		this.profissional = profissional;
 	}
 
+	//Métodos Get Set
 
 
 	public Servico getServico() {
@@ -60,25 +64,25 @@ public class CalendarioProfissionalKey implements Serializable {
 
 
 
-	public LocalDateTime getHoraInicial() {
+	public LocalTime getHoraInicial() {
 		return horaInicial;
 	}
 
 
 
-	public void setHoraInicial(LocalDateTime horaInicial) {
+	public void setHoraInicial(LocalTime horaInicial) {
 		this.horaInicial = horaInicial;
 	}
 
 
 
-	public LocalDateTime getHoraFinal() {
+	public LocalTime getHoraFinal() {
 		return horaFinal;
 	}
 
 
 
-	public void setHoraFinal(LocalDateTime horaFinal) {
+	public void setHoraFinal(LocalTime horaFinal) {
 		this.horaFinal = horaFinal;
 	}
 
@@ -92,6 +96,8 @@ public class CalendarioProfissionalKey implements Serializable {
 		this.profissional = profissional;
 	}
 
+	//Método HashCode
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(data, horaFinal, horaInicial, servico);

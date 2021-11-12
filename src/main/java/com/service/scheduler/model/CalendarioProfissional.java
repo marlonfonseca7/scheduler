@@ -3,6 +3,8 @@ package com.service.scheduler.model;
 import com.service.scheduler.enums.Status;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,14 +20,15 @@ public class CalendarioProfissional implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private CalendarioProfissionalKey calendarioProfissional;
+	private CalendarioProfissionalKey calendarioProfissionalKey;
 	
 	//@ManyToOne
 	//@JoinColumn(name="profissional")
 	//private Profissional profissional;
 	
 	@Enumerated(EnumType.ORDINAL) // para gravar no banco o índice(começa com zero) e não o nome
-    private Status status;
+	 @Column(columnDefinition = "smallint")
+	private Status status;
 	
 	public CalendarioProfissional() {
 		// TODO Auto-generated constructor stub
@@ -33,20 +36,20 @@ public class CalendarioProfissional implements Serializable {
 
 	
 	
-	public CalendarioProfissional(CalendarioProfissionalKey calendarioProfissional, Status status) {
+	public CalendarioProfissional(CalendarioProfissionalKey calendarioProfissionalKey, Status status) {
 		super();
-		this.calendarioProfissional = calendarioProfissional;
+		this.calendarioProfissionalKey = calendarioProfissionalKey;
 		this.status = status;
 	}
 
 
 
 	public CalendarioProfissionalKey getCalendarioProfissional() {
-		return calendarioProfissional;
+		return calendarioProfissionalKey;
 	}
 
-	public void setCalendarioProfissional(CalendarioProfissionalKey calendarioProfissional) {
-		this.calendarioProfissional = calendarioProfissional;
+	public void setCalendarioProfissional(CalendarioProfissionalKey calendarioProfissionalKey) {
+		this.calendarioProfissionalKey = calendarioProfissionalKey;
 	}
 	
 	public Status getStatus() {
@@ -61,7 +64,7 @@ public class CalendarioProfissional implements Serializable {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(calendarioProfissional);
+		return Objects.hash(calendarioProfissionalKey);
 	}
 
 	@Override
@@ -73,7 +76,7 @@ public class CalendarioProfissional implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		CalendarioProfissional other = (CalendarioProfissional) obj;
-		return Objects.equals(calendarioProfissional, other.calendarioProfissional);
+		return Objects.equals(calendarioProfissionalKey, other.calendarioProfissionalKey);
 	}
 
 
